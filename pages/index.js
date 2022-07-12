@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React, { useState, useEffect } from 'react'
-import useTypingGame from 'react-typing-game-hook'
 
 export default function Home() {
   const swedishPhrase = 'this is a phrase'
@@ -13,16 +12,17 @@ export default function Home() {
   const [charIndex, setCharIndex] = useState(0)
   const [isCorrect, setIsCorrect] = useState(false)
 
-  const {
-    states: { chars, charsState },
-    actions: { insertTyping, resetTyping, deleteTyping },
-  } = useTypingGame(swedishPhrase)
+  useEffect(() => {
+    console.log(charIndex)
+    console.log(stringIsArray[charIndex])
+    console.log(userInput)
+  }, [handleKeyDown])
 
   function stringToArray(string) {
     return [...string]
   }
 
-  function handleKeyDown({ keyCode, key }) {
+  function handleKeyDown({ keyCode, key, target }) {
     setUserInput(key)
     checkMatch()
   }
@@ -48,7 +48,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {`what you can pressed:${userInput}`}
+        {`what you pressed:${userInput}`}
         <br />
         {`what the computer sees:${userInput}`}
         <br />
@@ -56,6 +56,7 @@ export default function Home() {
         <br />
         {`what letter you need to press:${stringIsArray[charIndex]}`}
         <br />
+        {charIndex}
         {showPhrase && (
           <div className={styles.wrapper}>
             {stringIsArray.map((character, index) => (
@@ -69,7 +70,6 @@ export default function Home() {
           typeof="text"
           onChange={(e) => setChar(e.target.value)}
           onKeyDown={handleKeyDown}
-          tabIndex="0"
         />
         <div className={styles.containerButtons}>
           <button
