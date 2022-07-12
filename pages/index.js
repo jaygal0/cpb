@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export default function Home() {
   const swedishPhrase = 'this is a phrase'
@@ -11,12 +11,11 @@ export default function Home() {
   const [char, setChar] = useState('')
   const [charIndex, setCharIndex] = useState(0)
   const [isCorrect, setIsCorrect] = useState(false)
+  const textInput = useRef(null)
 
   useEffect(() => {
-    console.log(charIndex)
-    console.log(stringIsArray[charIndex])
-    console.log(userInput)
-  }, [handleKeyDown])
+    textInput.current.focus()
+  }, [])
 
   function stringToArray(string) {
     return [...string]
@@ -25,6 +24,15 @@ export default function Home() {
   function handleKeyDown({ keyCode, key, target }) {
     setUserInput(key)
     checkMatch()
+
+    if (keyCode === 8) {
+      setCharIndex(charIndex - 1)
+      setUserInput('')
+    }
+
+    if (charIndex <= -1) {
+      setCharIndex(0)
+    }
   }
 
   function checkMatch() {
@@ -66,9 +74,9 @@ export default function Home() {
         )}
         <div className={styles.wrapper}>This is a Swedish phrase</div>
         <input
+          ref={textInput}
           className={isCorrect ? 'blue' : 'red'}
           typeof="text"
-          onChange={(e) => setChar(e.target.value)}
           onKeyDown={handleKeyDown}
         />
         <div className={styles.containerButtons}>
