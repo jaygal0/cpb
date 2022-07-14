@@ -3,51 +3,75 @@ import styles from '../styles/Home.module.css'
 import React, { useState, useEffect, useRef } from 'react'
 
 export default function Home() {
-  const swedishPhrase = 'this is a phrase'
-  let stringIsArray = stringToArray(swedishPhrase)
-
   const [showPhrase, setShowPhrase] = useState(true)
   const [userInput, setUserInput] = useState('')
-  const [char, setChar] = useState('')
+  const [inputIndex, setInputIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
-  const [isCorrect, setIsCorrect] = useState(false)
-  const [isWrong, setIsWrong] = useState(true)
+  const [isCorrect, setIsCorrect] = useState(true)
+  const [isWrong, setIsWrong] = useState(false)
+  const [isIndexMatch, setIsIndexMatch] = useState(false)
   const textInput = useRef(null)
-
-  useEffect(() => {
-    textInput.current.focus()
-  }, [])
 
   function stringToArray(string) {
     return [...string]
   }
 
-  function handleKeyDown({ keyCode, key, target }) {
-    setUserInput(key)
-    checkMatch()
+  const swedishPhrase = 'den här är en svensk meningen'
 
-    if (keyCode === 8) {
+  let stringIsArray = stringToArray(swedishPhrase)
+
+  useEffect(() => {
+    textInput.current.focus()
+  }, [])
+
+  useEffect(() => {
+    checkMatch()
+  }, [userInput])
+
+  function handleKeyDown({ key }) {
+    setUserInput(key)
+
+    if (key === 'Backspace' && isIndexMatch) {
+      setInputIndex(inputIndex - 1)
       setCharIndex(charIndex - 1)
-      setUserInput('')
+    } else if (key === 'Meta') {
+      // FIXME: This needs to be fixed, for now this is a temporary solution
+
+      setInputIndex(0)
+      setCharIndex(0)
+    } else {
+      setInputIndex(inputIndex + 1)
     }
   }
 
-  // Why does can't it sit inside a function?
-  function checkMatch() {}
-
-  // Why does this work here and not hidden in the fuction? is this where I should leave it?
-  const charToCompare = stringIsArray[charIndex]
-  const doesItMatch = charToCompare === userInput
-
-  if (doesItMatch) {
-    setCharIndex(charIndex + 1)
-    setIsCorrect(true)
-  }
-
-  // should I be leaving this here? does it need to be in a function?
-  // is this where I try to figure out what is going on with the delete button?
+  // To prevent the index's to go below 0
   if (charIndex <= -1) {
     setCharIndex(0)
+  }
+  if (inputIndex <= -1) {
+    setInputIndex(0)
+  }
+
+  function handleOnChange(e) {
+    if (inputIndex === charIndex) {
+      setIsIndexMatch(true)
+    } else {
+      setIsIndexMatch(false)
+    }
+  }
+
+  function checkMatch() {
+    const charToCompare = stringIsArray[charIndex]
+    const doesItMatch = charToCompare === userInput
+
+    if (doesItMatch) {
+      setCharIndex(charIndex + 1)
+      setIsCorrect(true)
+      setIsWrong(false)
+    } else {
+      setIsCorrect(false)
+      setIsWrong(true)
+    }
   }
 
   return (
@@ -59,15 +83,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {`what you pressed:${userInput}`}
+        {`what you pressed: ${userInput}`}
         <br />
-        {`what the computer sees:${userInput}`}
+        {`inputIndex: ${inputIndex}`}
         <br />
-        {`the current character index:${charIndex}`}
+        {`charIndex: ${charIndex}`}
         <br />
-        {`what letter you need to press:${stringIsArray[charIndex]}`}
+        {`what letter you need to press: ${stringIsArray[charIndex]}`}
         <br />
-        {charIndex}
+        {`isCorrect: ${isCorrect}`}
+        <br />
+        {`isWrong: ${isWrong}`}
+        <br />
         {showPhrase && (
           <div className={styles.wrapper}>
             {stringIsArray.map((character, index) => (
@@ -78,9 +105,10 @@ export default function Home() {
         <div className={styles.wrapper}>This is a Swedish phrase</div>
         <input
           ref={textInput}
-          className={isCorrect ? 'blue' : 'red'}
+          className={isCorrect & !isWrong ? 'blue' : 'red'}
           typeof="text"
           onKeyDown={handleKeyDown}
+          onChange={handleOnChange}
         />
         <div className={styles.containerButtons}>
           <button
