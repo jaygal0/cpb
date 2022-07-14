@@ -11,6 +11,7 @@ export default function Home() {
   const [char, setChar] = useState('')
   const [charIndex, setCharIndex] = useState(0)
   const [isCorrect, setIsCorrect] = useState(false)
+  const [isWrong, setIsWrong] = useState(true)
   const textInput = useRef(null)
 
   useEffect(() => {
@@ -29,22 +30,24 @@ export default function Home() {
       setCharIndex(charIndex - 1)
       setUserInput('')
     }
-
-    if (charIndex <= -1) {
-      setCharIndex(0)
-    }
   }
 
-  function checkMatch() {
-    const wordToCompare = stringIsArray[charIndex]
-    const doesItMatch = wordToCompare === userInput
+  // Why does can't it sit inside a function?
+  function checkMatch() {}
 
-    if (doesItMatch) {
-      setCharIndex(charIndex + 1)
-      setIsCorrect(true)
-    } else {
-      setIsCorrect(false)
-    }
+  // Why does this work here and not hidden in the fuction? is this where I should leave it?
+  const charToCompare = stringIsArray[charIndex]
+  const doesItMatch = charToCompare === userInput
+
+  if (doesItMatch) {
+    setCharIndex(charIndex + 1)
+    setIsCorrect(true)
+  }
+
+  // should I be leaving this here? does it need to be in a function?
+  // is this where I try to figure out what is going on with the delete button?
+  if (charIndex <= -1) {
+    setCharIndex(0)
   }
 
   return (
