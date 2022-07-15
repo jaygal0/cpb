@@ -8,6 +8,11 @@ export default function Home() {
   const [showPhrase, setShowPhrase] = useState(false)
   const [randomArray, setRandomArray] = useState([])
   const [random, setRandom] = useState(0)
+  const textInput = useRef(null)
+
+  useEffect(() => {
+    textInput.current.focus()
+  }, [])
 
   const swedishPhrase = data[random].swe
   const englishPhrase = data[random].eng
@@ -56,9 +61,14 @@ export default function Home() {
       deleteTyping(false)
     } else if (key.length === 1) {
       insertTyping(key)
+    } else if (key === 'Enter' && phase != 2) {
+      setShowPhrase(!showPhrase)
+    }
+
+    if (key !== 'Enter') {
+      setShowPhrase(false)
     }
     e.preventDefault()
-    setShowPhrase(false)
   }
 
   // function to hide/show the answer
@@ -80,6 +90,7 @@ export default function Home() {
           onKeyDown={handleKeyDown}
           className={showPhrase ? 'background' : ''}
           tabIndex={1}
+          ref={textInput}
         >
           {chars.split('').map((char, index) => {
             let state = charsState[index]
