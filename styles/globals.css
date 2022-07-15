@@ -15,11 +15,21 @@ a {
   box-sizing: border-box;
 }
 
-.red {
-  color: red;
+.white {
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: red;
+}
+
+.green {
+  color: green;
   font-weight: bold;
 }
 
-.blue {
-  color: blue;
+.background {
+  background: red;
+}
+
+::selection {
+  background: white;
 }

@@ -1,77 +1,69 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React, { useState, useEffect, useRef } from 'react'
+import useTypingGame, { PhaseType } from 'react-typing-game-hook'
+import data from '../data/'
 
 export default function Home() {
-  const [showPhrase, setShowPhrase] = useState(true)
-  const [userInput, setUserInput] = useState('')
-  const [inputIndex, setInputIndex] = useState(0)
-  const [charIndex, setCharIndex] = useState(0)
-  const [isCorrect, setIsCorrect] = useState(true)
-  const [isWrong, setIsWrong] = useState(false)
-  const [isIndexMatch, setIsIndexMatch] = useState(false)
-  const textInput = useRef(null)
+  const [showPhrase, setShowPhrase] = useState(false)
+  const [randomArray, setRandomArray] = useState([])
+  const [random, setRandom] = useState(0)
 
-  function stringToArray(string) {
-    return [...string]
+  const swedishPhrase = data[random].swe
+  const englishPhrase = data[random].eng
+
+  // Callthe useTypingGame packaage
+  const {
+    states: { chars, charsState, correctChar, phase },
+    actions: { insertTyping, resetTyping, deleteTyping },
+  } = useTypingGame(swedishPhrase, { pauseOnError: true })
+
+  // A function to go through every example in the database, the logic is still a little messy
+  function grabRandomPhrase() {
+    let randomNo = Math.floor(Math.random() * data.length)
+
+    // FIXME: Need to figure out this logic properly since I may need to hit the button several times before I see a new sentence
+    for (let i = 0; i < data.length; i++) {
+      if (!randomArray.includes(randomNo)) {
+        // Add a new item to the array
+        setRandomArray([...randomArray, randomNo])
+        setRandom(randomNo)
+      } else if (randomArray.length - 1 === data.length - 1) {
+        // Reset Array
+        setRandomArray([])
+        console.log('reset')
+      } else {
+        // Do nothing
+        console.log('do nothing')
+      }
+    }
   }
 
-  const swedishPhrase = 'den här är en svensk meningen'
-
-  let stringIsArray = stringToArray(swedishPhrase)
-
+  // Select a random entry from the beginning
   useEffect(() => {
-    textInput.current.focus()
+    setRandom(Math.floor(Math.random() * data.length))
   }, [])
 
-  useEffect(() => {
-    checkMatch()
-  }, [userInput])
+  // function to handle the onKeyDown in the "input"
+  function handleKeyDown(e) {
+    const key = e.key
 
-  function handleKeyDown({ key }) {
-    setUserInput(key)
-
-    if (key === 'Backspace' && isIndexMatch) {
-      setInputIndex(inputIndex - 1)
-      setCharIndex(charIndex - 1)
-    } else if (key === 'Meta') {
-      // FIXME: This needs to be fixed, for now this is a temporary solution
-
-      setInputIndex(0)
-      setCharIndex(0)
-    } else {
-      setInputIndex(inputIndex + 1)
+    if (key === 'Enter' && phase === 2) {
+      grabRandomPhrase()
+    } else if (key === 'Escape') {
+      resetTyping()
+    } else if (key === 'Backspace') {
+      deleteTyping(false)
+    } else if (key.length === 1) {
+      insertTyping(key)
     }
+    e.preventDefault()
+    setShowPhrase(false)
   }
 
-  // To prevent the index's to go below 0
-  if (charIndex <= -1) {
-    setCharIndex(0)
-  }
-  if (inputIndex <= -1) {
-    setInputIndex(0)
-  }
-
-  function handleOnChange(e) {
-    if (inputIndex === charIndex) {
-      setIsIndexMatch(true)
-    } else {
-      setIsIndexMatch(false)
-    }
-  }
-
-  function checkMatch() {
-    const charToCompare = stringIsArray[charIndex]
-    const doesItMatch = charToCompare === userInput
-
-    if (doesItMatch) {
-      setCharIndex(charIndex + 1)
-      setIsCorrect(true)
-      setIsWrong(false)
-    } else {
-      setIsCorrect(false)
-      setIsWrong(true)
-    }
+  // function to hide/show the answer
+  function togglePhrase() {
+    setShowPhrase(!showPhrase)
   }
 
   return (
@@ -83,47 +75,26 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {`what you pressed: ${userInput}`}
-        <br />
-        {`inputIndex: ${inputIndex}`}
-        <br />
-        {`charIndex: ${charIndex}`}
-        <br />
-        {`what letter you need to press: ${stringIsArray[charIndex]}`}
-        <br />
-        {`isCorrect: ${isCorrect}`}
-        <br />
-        {`isWrong: ${isWrong}`}
-        <br />
-        {showPhrase && (
-          <div className={styles.wrapper}>
-            {stringIsArray.map((character, index) => (
-              <span key={index}>{character}</span>
-            ))}
-          </div>
-        )}
-        <div className={styles.wrapper}>This is a Swedish phrase</div>
-        <input
-          ref={textInput}
-          className={isCorrect & !isWrong ? 'blue' : 'red'}
-          typeof="text"
+        <h1>{englishPhrase}</h1>
+        <h1
           onKeyDown={handleKeyDown}
-          onChange={handleOnChange}
-        />
-        <div className={styles.containerButtons}>
-          <button
-            onClick={(e) => {
-              setShowPhrase(!showPhrase)
-            }}
-          >
-            {showPhrase ? 'Hide Original Phrase' : 'Show Original Phrase'}
-          </button>
-          <button>Hint</button>
-          <button>Next</button>
-        </div>
+          className={showPhrase ? 'background' : ''}
+          tabIndex={1}
+        >
+          {chars.split('').map((char, index) => {
+            let state = charsState[index]
+            let color = state === 0 ? 'white' : state === 1 ? 'green' : 'white'
+            return (
+              <span key={char + index} className={color}>
+                {char}
+              </span>
+            )
+          })}
+        </h1>
+        <button onClick={togglePhrase} tabIndex={2}>
+          show phrase
+        </button>
       </main>
-
-      <footer className={styles.footer}></footer>
     </div>
   )
 }
