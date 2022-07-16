@@ -1654,7 +1654,7 @@ export default [
   },
   {
     swe: 'spöke',
-    eng: '',
+    eng: 'ghost',
   },
   {
     swe: 'är det där ett spöke?',

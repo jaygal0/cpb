@@ -19,9 +19,12 @@ export default function Home() {
 
   // Callthe useTypingGame packaage
   const {
-    states: { chars, charsState, correctChar, phase },
+    states: { chars, charsState, currIndex, phase },
     actions: { insertTyping, resetTyping, deleteTyping },
-  } = useTypingGame(swedishPhrase, { pauseOnError: true })
+  } = useTypingGame(swedishPhrase, {
+    pauseOnError: true,
+    skipCurrentWordOnSpace: false,
+  })
 
   // A function to go through every example in the database, the logic is still a little messy
   function grabRandomPhrase() {
@@ -96,15 +99,15 @@ export default function Home() {
             let state = charsState[index]
             let color = state === 0 ? 'white' : state === 1 ? 'green' : 'white'
             return (
-              <span key={char + index} className={color}>
+              <span
+                key={char + index}
+                className={currIndex + 1 == index ? 'cursor' : color}
+              >
                 {char}
               </span>
             )
           })}
         </h1>
-        <button onClick={togglePhrase} tabIndex={2}>
-          show phrase
-        </button>
       </main>
     </div>
   )

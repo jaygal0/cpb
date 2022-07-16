@@ -15,15 +15,25 @@ a {
   box-sizing: border-box;
 }
 
+h1 {
+  outline: none;
+}
+
 .white {
   color: white;
-  text-decoration: underline;
-  text-decoration-color: red;
+  border-bottom: 4px solid white;
+  padding-bottom: 4px;
 }
 
 .green {
   color: green;
   font-weight: bold;
+}
+
+.cursor {
+  color: white;
+  border-bottom: 4px solid black;
+  padding-bottom: 4px;
 }
 
 .background {
