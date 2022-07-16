@@ -1661,7 +1661,7 @@ export default [
     eng: 'is that a ghost?',
   },
   {
-    swe: 'jag ser inget',
+    swe: 'Jag ser inget',
     eng: "I don't see anything",
   },
   {
