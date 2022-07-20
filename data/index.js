@@ -1353,7 +1353,7 @@ export default [
     eng: "that's not ripe",
   },
   {
-    swe: 'vi har redan sellari hemma',
+    swe: 'vi har redan selleri hemma',
     eng: 'we already have celery at home',
   },
   {
