@@ -1,0 +1,36 @@
+@import '../abstract/variables';
+
+.container {
+  width: 48rem;
+  padding: 2.4rem 3.2rem;
+  background-color: $white;
+  color: $green-01;
+  border-radius: $radius-md;
+  border: 2px solid $green-01;
+}
+
+.textWrapperNoHint {
+  border-radius: $radius-md;
+  background: $white;
+  padding: 1.6rem 2.4rem;
+}
+
+.textWrapperHint {
+  border-radius: $radius-md;
+  background: $green-04;
+  padding: 1.6rem 2.4rem;
+}
+
+.correct {
+  color: $green-01;
+}
+
+.cursor {
+  color: $white;
+  border-bottom: 2px solid $green-02;
+  padding-bottom: 4px;
+}
+
+.hide {
+  color: $white;
+}

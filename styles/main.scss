@@ -1,0 +1,31 @@
+@import 'abstract/variables';
+@import 'abstract/mixins';
+@import 'base/animations';
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/grid';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  outline: none;
+  font-family: Inter;
+  font-size: 2.1rem;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+::selection {
+  background: white;
+}

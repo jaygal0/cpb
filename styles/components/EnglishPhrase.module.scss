@@ -1,0 +1,9 @@
+@import '../abstract/variables';
+
+.container {
+  width: 48rem;
+  padding: 4rem 5.6rem;
+  background-color: $green-01;
+  color: $white;
+  border-radius: $radius-md;
+}
