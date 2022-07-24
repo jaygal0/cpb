@@ -129,6 +129,10 @@ export default function Home() {
           </div>
         </div>
       </main>
+      {/*FIXME: Clean up the padding and color  */}
+      <footer className="footer-grid body-md">
+        {showPhrase ? 'Hit Enter ↩ to remove clue' : 'Hit Enter ↩ to show clue'}
+      </footer>
     </>
   )
 }
