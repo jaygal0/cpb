@@ -6,13 +6,16 @@ import EnglishPhrase from '../components/EnglishPhrase'
 import styles from '../styles/components/App.module.scss'
 
 export default function Home() {
-  const [showPhrase, setShowPhrase] = useState(false)
-  const [randomArray, setRandomArray] = useState([])
-  const [random, setRandom] = useState(0)
-  const textInput = useRef(null)
+  const [showPhrase, setShowPhrase] = useState<boolean>(false)
+  const [randomArray, setRandomArray] = useState<number[]>([])
+  const [random, setRandom] = useState<number>(0)
+  const textInput = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    textInput.current.focus()
+    // Need this to allow textInput to equal to null in TS
+    if (textInput.current != null) {
+      textInput.current.focus()
+    }
   }, [])
 
   const swedishPhrase = data[random].swe
@@ -55,7 +58,7 @@ export default function Home() {
   }, [])
 
   // function to handle the onKeyDown in the "input"
-  function handleKeyDown(e) {
+  function handleKeyDown(e: any) {
     const key = e.key
 
     if (key === 'Enter' && phase === 2) {
