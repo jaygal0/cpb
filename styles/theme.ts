@@ -1,0 +1,33 @@
+export default {
+  type: {
+    displayLg: '10.5rem',
+    displayMd: '8rem',
+    displaySm: '6.1rem',
+    titleLg: '4.7rem',
+    titleMd: '3.6rem',
+    titleSm: '2.7rem',
+    bodyLg: '2.1rem',
+    bodyMd: '1.6rem',
+    bodySm: '1.2rem',
+  },
+  color: {
+    green01: '#2E6A50',
+    green02: '#41916C',
+    green03: '#51B788',
+    green04: '#74C79D',
+    green05: '#D7F3DC',
+    gray01: '#B5B5B5',
+    gray02: '#C4C4C4',
+    gray03: '#D3D3D3',
+    gray04: '#E1E1E1',
+    gray05: '#F0F0F0',
+    gray06: '#F8F8F8',
+    black: '#1F1F1F',
+    white: '#FFFF',
+  },
+  radius: {
+    sm: '',
+    md: '8px',
+    lg: '',
+  },
+}
