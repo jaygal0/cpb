@@ -27,7 +27,7 @@ h1 {
   background: white;
 }
 
-.textWrapperNoHint {
+.textWrapperBackground{
   border-radius: 8px;
   background: white;
   padding: 1.6rem 2.4rem;
@@ -43,10 +43,17 @@ h1 {
   border-radius: 8px;
   background: #D7F3DC;
   padding: 1.6rem 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .hide {
 color: white;
+}
+
+.hint {
+color: #51B788;
 }
 
 .correct {

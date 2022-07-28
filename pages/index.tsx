@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import React, { useState, useEffect, useRef } from 'react'
 import useTypingGame from 'react-typing-game-hook'
 import data from '../data/'
@@ -89,13 +90,7 @@ export default function Home() {
         <EnglishPhrase text={englishPhrase} />
         <IndexInputContainer>
           <div
-            className={
-              showPhrase
-                ? 'textWrapperHint'
-                : phase === 2
-                ? 'correctInput'
-                : 'textWrapperNoHint'
-            }
+            className={phase === 2 ? 'correctInput' : 'textWrapperBackground'}
           >
             <h1 onKeyDown={handleKeyDown} tabIndex={1} ref={textInput}>
               {chars.split('').map((char, index) => {
@@ -105,13 +100,20 @@ export default function Home() {
                 return (
                   <span
                     key={char + index}
-                    className={currIndex + 1 == index ? 'cursor' : color}
+                    className={
+                      !showPhrase && currIndex + 1 == index
+                        ? 'cursor'
+                        : currIndex + 1 == index
+                        ? 'hint'
+                        : color
+                    }
                   >
                     {char}
                   </span>
                 )
               })}
             </h1>
+            {phase === 2 && <Image src="/tick.svg" width={32} height={32} />}
           </div>
         </IndexInputContainer>
       </IndexMainContainer>
