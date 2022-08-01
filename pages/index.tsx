@@ -7,7 +7,9 @@ import { IndexMainContainer, IndexInputContainer } from '../styles'
 import EnglishPhrase from '../components/EnglishPhrase'
 import Footer from '../components/Footer'
 
-export default function Home() {
+export default function Home({ phrase }: { phrase: any }) {
+  console.log(phrase)
+
   const [showPhrase, setShowPhrase] = useState<boolean>(false)
   const [randomArray, setRandomArray] = useState<number[]>([])
   const [random, setRandom] = useState<number>(0)
@@ -127,4 +129,21 @@ export default function Home() {
       )}
     </>
   )
+}
+
+export async function getStaticProps(context: any) {
+  const site = process.env.WEB_SITE
+
+  const res = await fetch(`${site}/api/phrase/`)
+  const phrase = await res.json()
+
+  if (!phrase) {
+    return {
+      notfound: true,
+    }
+  }
+
+  return {
+    props: { phrase },
+  }
 }

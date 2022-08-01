@@ -19,7 +19,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/EnglishPhrase.js"
+    "components/EnglishPhrase.js",
+    "utils/dbConnect.js"
   ],
   "exclude": ["node_modules"]
 }
