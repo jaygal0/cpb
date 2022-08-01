@@ -135,16 +135,12 @@ export default function Home({ phrase }: { phrase: any }) {
   )
 }
 
-export async function getStaticProps(context: any) {
+export async function getServerSideProps(context: any) {
   let site = process.env.WEB_SITE
   let res = await fetch(`${site}/api/phrase/`, {
     method: 'GET',
-    // headers: {
-    //   'Content-Type': 'application/json',
-    // },
     headers: {
-      Accept: 'application/json, text/plain, */*',
-      'User-Agent': '*',
+      'Content-Type': 'application/json',
     },
   })
   let phrase = await res.json()
