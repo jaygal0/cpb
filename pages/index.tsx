@@ -2,21 +2,18 @@ import Head from 'next/head'
 import Image from 'next/image'
 import React, { useState, useEffect, useRef } from 'react'
 import useTypingGame from 'react-typing-game-hook'
-import data from '../data/'
 import { IndexMainContainer, IndexInputContainer } from '../styles'
 import EnglishPhrase from '../components/EnglishPhrase'
 import Footer from '../components/Footer'
 
 export default function Home({ phrase }: { phrase: any }) {
-  console.log(phrase)
-
   const [showPhrase, setShowPhrase] = useState<boolean>(false)
   const [randomArray, setRandomArray] = useState<number[]>([])
   const [random, setRandom] = useState<number>(0)
   const textInput = useRef<HTMLInputElement>(null)
 
-  const swedishPhrase = data[random].swe
-  const englishPhrase = data[random].eng
+  const swedishPhrase = phrase[random].swe.toLowerCase()
+  const englishPhrase = phrase[random].eng
 
   useEffect(() => {
     // Need this to allow textInput to equal to null in TS
@@ -37,15 +34,15 @@ export default function Home({ phrase }: { phrase: any }) {
 
   // A function to go through every example in the database, the logic is still a little messy
   function grabRandomPhrase() {
-    let randomNo = Math.floor(Math.random() * data.length)
+    let randomNo = Math.floor(Math.random() * phrase.length)
 
     // FIXME: Need to figure out this logic properly since I may need to hit the button several times before I see a new sentence
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < phrase.length; i++) {
       if (!randomArray.includes(randomNo)) {
         // Add a new item to the array
         setRandomArray([...randomArray, randomNo])
         setRandom(randomNo)
-      } else if (randomArray.length - 1 === data.length - 1) {
+      } else if (randomArray.length - 1 === phrase.length - 1) {
         // Reset Array
         setRandomArray([])
         console.log('reset')
@@ -58,7 +55,7 @@ export default function Home({ phrase }: { phrase: any }) {
 
   // Select a random entry from the beginning
   useEffect(() => {
-    setRandom(Math.floor(Math.random() * data.length))
+    setRandom(Math.floor(Math.random() * phrase.length))
   }, [])
 
   // function to handle the onKeyDown in the "input"
@@ -132,16 +129,13 @@ export default function Home({ phrase }: { phrase: any }) {
 }
 
 export async function getStaticProps(context: any) {
-  const site = process.env.WEB_SITE
-
-  const res = await fetch(`${site}/api/phrase/`)
-  const phrase = await res.json()
-
-  if (!phrase) {
-    return {
-      notfound: true,
-    }
-  }
+  let res = await fetch(`${process.env.WEB_SITE}/api/phrase`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  let phrase = await res.json()
 
   return {
     props: { phrase },

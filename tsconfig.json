@@ -20,7 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     "components/EnglishPhrase.js",
-    "utils/dbConnect.js"
+    "utils/dbConnect.ts",
+    "pages/api/phrase/index.js"
   ],
   "exclude": ["node_modules"]
 }
