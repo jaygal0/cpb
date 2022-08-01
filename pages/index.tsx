@@ -136,7 +136,8 @@ export default function Home({ phrase }: { phrase: any }) {
 }
 
 export async function getStaticProps(context: any) {
-  let res = await fetch(`${process.env.WEB_SITE}/api/phrase`, {
+  let site = process.env.WEB_SITE
+  let res = await fetch(`${site}/api/phrase/`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -146,6 +147,5 @@ export async function getStaticProps(context: any) {
 
   return {
     props: { phrase },
-    fallback: false,
   }
 }
