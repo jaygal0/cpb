@@ -139,8 +139,12 @@ export async function getStaticProps(context: any) {
   let site = process.env.WEB_SITE
   let res = await fetch(`${site}/api/phrase/`, {
     method: 'GET',
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
     headers: {
-      'Content-Type': 'application/json',
+      Accept: 'application/json, text/plain, */*',
+      'User-Agent': '*',
     },
   })
   let phrase = await res.json()
