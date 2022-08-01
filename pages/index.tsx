@@ -139,5 +139,6 @@ export async function getStaticProps(context: any) {
 
   return {
     props: { phrase },
+    fallback: false,
   }
 }
