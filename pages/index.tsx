@@ -112,7 +112,14 @@ export default function Home({ phrase }: { phrase: any }) {
                 )
               })}
             </h1>
-            {phase === 2 && <Image src="/tick.svg" width={32} height={32} />}
+            {phase === 2 && (
+              <Image
+                src="/tick.svg"
+                width={32}
+                height={32}
+                alt="correct tick"
+              />
+            )}
           </div>
         </IndexInputContainer>
       </IndexMainContainer>
