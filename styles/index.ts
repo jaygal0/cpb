@@ -1,15 +1,13 @@
 import styled from 'styled-components'
 
 export const IndexMainContainer = styled.main`
-  margin: 0 auto;
-  min-height: 88vh;
+  min-height: 100vh;
   max-width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 2.4rem;
-  background: ${({ theme }) => theme.color.green05};
+  background: ${({ theme }) => theme.color.green.background};
 `
 
 export const IndexInputContainer = styled.div`

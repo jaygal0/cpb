@@ -1,10 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import React, { useState, useEffect, useRef } from 'react'
-import useTypingGame from 'react-typing-game-hook'
 import { IndexMainContainer, IndexInputContainer } from '../styles'
 import Highlight from '../components/Highlight'
-import Footer from '../components/Footer'
 import Book from '../components/Book'
 import Author from '../components/Author'
 
@@ -29,11 +27,13 @@ export default function Home({ books }: { books: any }) {
       <Head>
         <title>Commonplacebook</title>
       </Head>
-      <p>commonplacebook</p>
-      <Highlight text={highlight} />
-      <Author text={author} />
-      <Book text={book} />
-      <p>Built by Joshua Galinato</p>
+      <IndexMainContainer>
+        <p>commonplacebook</p>
+        <Highlight text={highlight} count={highlight.length} />
+        <Author text={author} />
+        <Book text={book} />
+        <p>Built by Joshua Galinato</p>
+      </IndexMainContainer>
     </>
   )
 }
