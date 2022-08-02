@@ -34,15 +34,15 @@ export default function Home({ phrase }: { phrase: any }) {
 
   // A function to go through every example in the database, the logic is still a little messy
   function grabRandomPhrase() {
-    let randomNo = Math.floor(Math.random() * phrase.length)
+    let randomNo = Math.floor(Math.random() * phrase.data.length)
 
     // FIXME: Need to figure out this logic properly since I may need to hit the button several times before I see a new sentence
-    for (let i = 0; i < phrase.length; i++) {
+    for (let i = 0; i < phrase.data.length; i++) {
       if (!randomArray.includes(randomNo)) {
         // Add a new item to the array
         setRandomArray([...randomArray, randomNo])
         setRandom(randomNo)
-      } else if (randomArray.length - 1 === phrase.length - 1) {
+      } else if (randomArray.length - 1 === phrase.data.length - 1) {
         // Reset Array
         setRandomArray([])
         console.log('reset')
