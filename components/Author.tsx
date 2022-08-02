@@ -14,8 +14,8 @@ const Container = styled.div`
   }
 `
 
-const EnglishPhrase = ({ text }: { text: string }) => {
+const Author = ({ text }: { text: string }) => {
   return <Container>{text}</Container>
 }
 
-export default EnglishPhrase
+export default Author
