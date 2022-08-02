@@ -12,8 +12,8 @@ export default function Home({ phrase }: { phrase: any }) {
   const [random, setRandom] = useState<number>(0)
   const textInput = useRef<HTMLInputElement>(null)
 
-  const swedishPhrase = phrase[random].swe.toLowerCase()
-  const englishPhrase = phrase[random].eng
+  const swedishPhrase = phrase.data[random].swe.toLowerCase()
+  const englishPhrase = phrase.data[random].eng
 
   useEffect(() => {
     // Need this to allow textInput to equal to null in TS
@@ -55,7 +55,7 @@ export default function Home({ phrase }: { phrase: any }) {
 
   // Select a random entry from the beginning
   useEffect(() => {
-    setRandom(Math.floor(Math.random() * phrase.length))
+    setRandom(Math.floor(Math.random() * phrase.data.length))
   }, [])
 
   // function to handle the onKeyDown in the "input"
@@ -135,7 +135,7 @@ export default function Home({ phrase }: { phrase: any }) {
   )
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   let site = process.env.WEB_SITE
   let res = await fetch(`${site}/api/phrase/`, {
     method: 'GET',
