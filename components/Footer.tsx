@@ -1,33 +1,41 @@
 import React from 'react'
+import Image from 'next/image'
 import styled from 'styled-components'
 
 const Container = styled.footer`
-  margin: 0 auto;
-  min-height: 12vh;
-  max-width: 100vw;
+  padding: 6.4rem 2.4rem 2.4rem 0;
+  max-width: 20vw;
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.color.white};
-  color: ${({ theme }) => theme.color.green01};
-  border-top: 2px solid ${({ theme }) => theme.color.green04};
-  font-size: ${({ theme }) => theme.type.bodyMd};
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: ${({ theme }) => theme.color.green.primary};
+  font-size: ${({ theme }) => theme.type.md};
+  position: absolute;
+  right: 0;
 `
 
-const Code = styled.code`
-  font-size: ${({ theme }) => theme.type.bodySm};
-  background-color: ${({ theme }) => theme.color.gray05};
-  margin: 0 8px;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-family: monospace;
+const ContainerIcons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
 `
 
-const Footer = ({ text }: { text: string }) => {
+const BuiltBy = styled.div`
+  text-transform: capitalize;
+  color: ${({ theme }) => theme.color.white};
+  font-weight: 300;
+`
+
+const Footer = () => {
   return (
     <Container>
-      Hit <Code> Enter ⮐ </Code> to {text}
+      <ContainerIcons>
+        <Image src="/shuffle.svg" width={64} height={64} alt="" />
+        <Image src="/book-list.svg" width={64} height={64} alt="" />
+      </ContainerIcons>
+      <BuiltBy>built by joshua galinato</BuiltBy>
     </Container>
   )
 }

@@ -6,8 +6,9 @@ export const IndexMainContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2.4rem;
+  gap: 0rem;
   background: ${({ theme }) => theme.color.green.background};
+  position: relative;
 `
 
 export const IndexInputContainer = styled.div`

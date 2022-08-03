@@ -1,13 +1,23 @@
 export default {
   type: {
-    display: '6.7rem',
-    heading01: '5.1rem',
-    heading02: '3.8rem',
-    heading03: '2.8rem',
-    lg: '2.1rem',
-    md: '1.6rem',
-    sm: '1.2rem',
-    xs: '.9rem',
+    size: {
+      display: '6.7rem',
+      heading01: '5.1rem',
+      heading02: '3.8rem',
+      heading03: '2.8rem',
+      lg: '2.1rem',
+      md: '1.6rem',
+      sm: '1.2rem',
+      xs: '.9rem',
+    },
+    weight: {
+      normal: '400',
+      bold: '700',
+    },
+    height: {
+      normal: '130%',
+      tall: '150%',
+    },
   },
   color: {
     green: {
@@ -21,6 +31,7 @@ export default {
       linksHover: '#10584F',
       icon: '#19897B',
     },
+    white: '#fff',
   },
   radius: {
     sm: '',

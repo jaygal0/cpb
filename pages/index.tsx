@@ -1,22 +1,27 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import React, { useState, useEffect, useRef } from 'react'
 import { IndexMainContainer, IndexInputContainer } from '../styles'
 import Highlight from '../components/Highlight'
 import Book from '../components/Book'
 import Author from '../components/Author'
+import Footer from '../components/Footer'
+import Logo from '../components/Logo'
 
 export default function Home({ books }: { books: any }) {
   const [showPhrase, setShowPhrase] = useState<boolean>(false)
-  const [randomArray, setRandomArray] = useState<number[]>([])
-  const [random, setRandom] = useState<number>(0)
-  const textInput = useRef<HTMLInputElement>(null)
+  const [randomBook, setRandomBook] = useState<number>(0)
+  const [randomHighlight, setRandomHighlight] = useState<number>(0)
 
-  // deconstructing the prop
-  let { success, data } = books
+  // deconstructing the prop from the database
+  let { data } = books
 
-  let bookIndex = 1
-  let highlightIndex = 10
+  function shuffle() {
+    setRandomBook(Math.floor(Math.random() * data.length))
+    setRandomHighlight(Math.floor(Math.random() * data.length))
+  }
+
+  let bookIndex = randomBook
+  let highlightIndex = randomHighlight
 
   let highlight = data[bookIndex].highlights[highlightIndex].text
   let author = data[bookIndex].authors
@@ -28,11 +33,13 @@ export default function Home({ books }: { books: any }) {
         <title>Commonplacebook</title>
       </Head>
       <IndexMainContainer>
-        <p>commonplacebook</p>
+        <Logo />
         <Highlight text={highlight} count={highlight.length} />
         <Author text={author} />
         <Book text={book} />
-        <p>Built by Joshua Galinato</p>
+        <Footer />
+        {/* FIXME: figure out how I'm going to pass this prop */}
+        <button onClick={shuffle}>click me</button>
       </IndexMainContainer>
     </>
   )
