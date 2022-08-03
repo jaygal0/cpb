@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   IndexMainContainer,
   IndexFooterContainer,
@@ -13,27 +13,38 @@ import Author from '../components/Author'
 import Logo from '../components/Logo'
 
 export default function Home({ books }: { books: any }) {
-  const [randomBook, setRandomBook] = useState<number>(0)
-  const [randomHighlight, setRandomHighlight] = useState<number>(0)
+  const [randomTitle, setRandomTitle] = useState<string>('')
+  const [randomAuthor, setRandomAuthor] = useState<string>('')
+  const [randomHighlight, setRandomHighlight] = useState<string>('')
+  const [didClick, setDidClick] = useState<boolean>(true)
 
   // deconstructing the prop from the database
   let { data } = books
 
-  let book = data[randomBook].title
-  let highlight = data[randomBook].highlights[randomHighlight].text
-  let author = data[randomBook].authors
+  // need to use a useEffect in order to affect the states since useStates is a step behind for some reason
+  // it listens to the useState 'didClick'
+  useEffect(() => {
+    let theObject = data[Math.floor(Math.random() * data.length)]
+    let theHighlight =
+      theObject.highlights[
+        Math.floor(Math.random() * theObject.highlights.length)
+      ].text
+    let theAuthor = theObject.authors
+    let theTitle = theObject.title
 
-  console.log(data)
+    setRandomTitle(theTitle)
+    setRandomAuthor(theAuthor)
+    setRandomHighlight(theHighlight)
 
-  function shuffle() {
-    // FIXME: Figure out why it's crashing on certain places
-    // Do I create a promise async? To give it time to 'breath'?
-    setRandomBook(Math.floor(Math.random() * data.length))
-    setRandomHighlight(
-      Math.floor(Math.random() * data[randomBook].highlights.length)
-    )
-    console.log(randomBook)
-    console.log(randomHighlight)
+    console.log(theObject)
+    console.log(theTitle)
+    console.log(theAuthor)
+    console.log(theHighlight)
+  }, [didClick])
+
+  // a function to allow the useEffect to listen to the onClick
+  function handleClick() {
+    setDidClick(!didClick)
   }
 
   return (
@@ -43,12 +54,9 @@ export default function Home({ books }: { books: any }) {
       </Head>
       <IndexMainContainer>
         <Logo />
-        <Highlight
-          text={highlight ? highlight : 'reshuffle'}
-          count={highlight.length}
-        />
-        <Author text={author} />
-        <Book text={book} />
+        <Highlight text={randomHighlight} count={randomHighlight.length} />
+        <Author text={randomAuthor} />
+        <Book text={randomTitle} />
         <IndexFooterContainer>
           <IndexIconsContainer>
             <Image
@@ -56,7 +64,7 @@ export default function Home({ books }: { books: any }) {
               width={64}
               height={64}
               alt=""
-              onClick={shuffle}
+              onClick={handleClick}
               className="hover"
             />
             <Image src="/book-list.svg" width={64} height={64} alt="" />
@@ -65,8 +73,6 @@ export default function Home({ books }: { books: any }) {
             built by joshua galinato
           </IndexBuiltByContainer>
         </IndexFooterContainer>
-        {/* <Footer /> */}
-        {/* FIXME: figure out how I'm going to pass this prop */}
       </IndexMainContainer>
     </>
   )
