@@ -28,8 +28,6 @@ const ContainerDefaultText = styled.h2`
 `
 
 const Highlight = ({ text, count }: { text: string; count: number }) => {
-  console.log(count)
-
   return (
     <>
       {count <= 10 ? (

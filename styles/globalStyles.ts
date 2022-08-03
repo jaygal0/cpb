@@ -18,5 +18,9 @@ h1 {
   margin: 0;
 }
 
+.hover:hover {
+  cursor: pointer;
+}
+
 `
 export default GlobalStyle
