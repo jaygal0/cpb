@@ -1,151 +1,94 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import React, { useState, useEffect, useRef } from 'react'
-import useTypingGame from 'react-typing-game-hook'
-import { IndexMainContainer, IndexInputContainer } from '../styles'
-import EnglishPhrase from '../components/EnglishPhrase'
-import Footer from '../components/Footer'
+import React, { useEffect, useState } from 'react'
+import {
+  IndexMainContainer,
+  IndexFooterContainer,
+  IndexIconsContainer,
+  IndexBuiltByContainer,
+} from '../styles'
+import Highlight from '../components/Highlight'
+import Book from '../components/Book'
+import Author from '../components/Author'
+import Logo from '../components/Logo'
 
-export default function Home({ phrase }: { phrase: any }) {
-  const [showPhrase, setShowPhrase] = useState<boolean>(false)
-  const [randomArray, setRandomArray] = useState<number[]>([])
-  const [random, setRandom] = useState<number>(0)
-  const textInput = useRef<HTMLInputElement>(null)
+export default function Home({ books }: { books: any }) {
+  const [randomTitle, setRandomTitle] = useState<string>('')
+  const [randomAuthor, setRandomAuthor] = useState<string>('')
+  const [randomHighlight, setRandomHighlight] = useState<string>('')
+  const [didClick, setDidClick] = useState<boolean>(true)
 
-  const swedishPhrase = phrase.data[random].swe.toLowerCase()
-  const englishPhrase = phrase.data[random].eng
+  // deconstructing the prop from the database
+  let { data } = books
 
+  // need to use a useEffect in order to affect the states since useStates is a step behind for some reason
+  // it listens to the useState 'didClick'
   useEffect(() => {
-    // Need this to allow textInput to equal to null in TS
-    if (textInput.current != null) {
-      textInput.current.focus()
-    }
-  }, [])
+    let theObject = data[Math.floor(Math.random() * data.length)]
+    let theHighlight =
+      theObject.highlights[
+        Math.floor(Math.random() * theObject.highlights.length)
+      ].text
+    let theAuthor = theObject.authors
+    let theTitle = theObject.title
 
-  // Callthe useTypingGame packaage
-  const {
-    states: { chars, charsState, currIndex, phase },
-    actions: { insertTyping, resetTyping, deleteTyping },
-  } = useTypingGame(swedishPhrase, {
-    pauseOnError: true,
-    skipCurrentWordOnSpace: false,
-    countErrors: 'everytime',
-  })
+    setRandomTitle(theTitle)
+    setRandomAuthor(theAuthor)
+    setRandomHighlight(theHighlight)
 
-  // A function to go through every example in the database, the logic is still a little messy
-  function grabRandomPhrase() {
-    let randomNo = Math.floor(Math.random() * phrase.data.length)
+    console.log(theObject)
+    console.log(theTitle)
+    console.log(theAuthor)
+    console.log(theHighlight)
+  }, [didClick])
 
-    // FIXME: Need to figure out this logic properly since I may need to hit the button several times before I see a new sentence
-    for (let i = 0; i < phrase.data.length; i++) {
-      if (!randomArray.includes(randomNo)) {
-        // Add a new item to the array
-        setRandomArray([...randomArray, randomNo])
-        setRandom(randomNo)
-      } else if (randomArray.length - 1 === phrase.data.length - 1) {
-        // Reset Array
-        setRandomArray([])
-        console.log('reset')
-      } else {
-        // Do nothing
-        console.log('do nothing')
-      }
-    }
-  }
-
-  // Select a random entry from the beginning
-  useEffect(() => {
-    setRandom(Math.floor(Math.random() * phrase.data.length))
-  }, [])
-
-  // function to handle the onKeyDown in the "input"
-  function handleKeyDown(e: any) {
-    const key = e.key
-
-    if (key === 'Enter' && phase === 2) {
-      grabRandomPhrase()
-    } else if (key === 'Escape') {
-      resetTyping()
-    } else if (key === 'Backspace') {
-      deleteTyping(false)
-    } else if (key.length === 1) {
-      insertTyping(key)
-    } else if (key === 'Enter' && phase != 2) {
-      setShowPhrase(!showPhrase)
-    }
-
-    if (key !== 'Enter') {
-      setShowPhrase(false)
-    }
-    e.preventDefault()
+  // a function to allow the useEffect to listen to the onClick
+  function handleClick() {
+    setDidClick(!didClick)
   }
 
   return (
     <>
       <Head>
-        <title>Typ_ | Add one liner here</title>
+        <title>Commonplacebook</title>
       </Head>
       <IndexMainContainer>
-        <EnglishPhrase text={englishPhrase} />
-        <IndexInputContainer>
-          <div
-            className={phase === 2 ? 'correctInput' : 'textWrapperBackground'}
-          >
-            <h1 onKeyDown={handleKeyDown} tabIndex={1} ref={textInput}>
-              {chars.split('').map((char, index) => {
-                let state = charsState[index]
-                let color =
-                  state === 0 ? 'hide' : state === 1 ? 'correct' : 'hide'
-                return (
-                  <span
-                    key={char + index}
-                    className={
-                      !showPhrase && currIndex + 1 == index
-                        ? 'cursor'
-                        : currIndex + 1 == index
-                        ? 'hint'
-                        : color
-                    }
-                  >
-                    {char}
-                  </span>
-                )
-              })}
-            </h1>
-            {phase === 2 && (
-              <Image
-                src="/tick.svg"
-                width={32}
-                height={32}
-                alt="correct tick"
-              />
-            )}
-          </div>
-        </IndexInputContainer>
+        <Logo />
+        <Highlight text={randomHighlight} count={randomHighlight.length} />
+        <Author text={randomAuthor} />
+        <Book text={randomTitle} />
+        <IndexFooterContainer>
+          <IndexIconsContainer>
+            <Image
+              src="/shuffle.svg"
+              width={64}
+              height={64}
+              alt=""
+              onClick={handleClick}
+              className="hover"
+            />
+            <Image src="/book-list.svg" width={64} height={64} alt="" />
+          </IndexIconsContainer>
+          <IndexBuiltByContainer>
+            built by joshua galinato
+          </IndexBuiltByContainer>
+        </IndexFooterContainer>
       </IndexMainContainer>
-
-      {showPhrase ? (
-        <Footer text="remove clue" />
-      ) : phase === 2 ? (
-        <Footer text="continue" />
-      ) : (
-        <Footer text="show clue" />
-      )}
     </>
   )
 }
 
 export async function getStaticProps(context: any) {
   let site = process.env.WEB_SITE
-  let res = await fetch(`${site}/api/phrase/`, {
+  let res = await fetch(`${site}/api/books/`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-  let phrase = await res.json()
+  let books = await res.json()
 
   return {
-    props: { phrase },
+    props: { books },
   }
 }

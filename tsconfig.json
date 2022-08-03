@@ -19,7 +19,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "components/EnglishPhrase.js",
+    "components/Highlight.js",
     "utils/dbConnect.ts",
     "pages/api/books/index.js"
   ],
