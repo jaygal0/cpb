@@ -11,6 +11,10 @@ export const IndexMainContainer = styled.main`
   position: relative;
 `
 
+export const IndexMainBookContainer = styled.main`
+  background: ${({ theme }) => theme.color.green.background};
+`
+
 export const IndexInputContainer = styled.div`
   width: 48rem;
   padding: 2.4rem 3.2rem;

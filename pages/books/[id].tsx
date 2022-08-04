@@ -1,18 +1,12 @@
 import React from 'react'
+import HighlightList from '../../components/HighlightList'
 
 const index = ({ docs }: { docs: any }) => {
   const { data } = docs
-  console.log(docs)
 
   return (
     <>
-      <div>
-        <h1>
-          {data[0].highlights.map((e: any) => (
-            <p key={e.text}>{e.text}</p>
-          ))}
-        </h1>
-      </div>
+      <HighlightList data={data} />
     </>
   )
 }

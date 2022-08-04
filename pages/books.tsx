@@ -1,22 +1,9 @@
 import React from 'react'
-import Link from 'next/link'
-// import BookList from '../components/BookList'
+import BookList from '../components/BookList'
 
 export default function bookList({ docs }: { docs: any }) {
   const { data } = docs
-  return (
-    <>
-      <ul>
-        {data.map((book: any) => (
-          <li key={`${book.id}-${book.title}`}>
-            <Link
-              href={`/books/${book.asin}`}
-            >{`${book.title} by ${book.authors}`}</Link>
-          </li>
-        ))}
-      </ul>
-    </>
-  )
+  return <BookList data={data} />
 }
 
 export async function getServerSideProps(context: any) {
