@@ -6,11 +6,13 @@ import {
   IndexFooterContainer,
   IndexIconsContainer,
   IndexBuiltByContainer,
+  Button,
 } from '../styles'
 import Highlight from '../components/Highlight'
 import Book from '../components/Book'
 import Author from '../components/Author'
 import Logo from '../components/Logo'
+import Link from 'next/link'
 
 export default function Home({ books }: { books: any }) {
   const [randomTitle, setRandomTitle] = useState<string>('')
@@ -35,11 +37,6 @@ export default function Home({ books }: { books: any }) {
     setRandomTitle(theTitle)
     setRandomAuthor(theAuthor)
     setRandomHighlight(theHighlight)
-
-    console.log(theObject)
-    console.log(theTitle)
-    console.log(theAuthor)
-    console.log(theHighlight)
   }, [didClick])
 
   // a function to allow the useEffect to listen to the onClick
@@ -59,15 +56,12 @@ export default function Home({ books }: { books: any }) {
         <Book text={randomTitle} />
         <IndexFooterContainer>
           <IndexIconsContainer>
-            <Image
-              src="/shuffle.svg"
-              width={64}
-              height={64}
-              alt=""
-              onClick={handleClick}
-              className="hover"
-            />
-            <Image src="/book-list.svg" width={64} height={64} alt="" />
+            <Button onClick={handleClick} tabIndex={1}>
+              <Image src="/shuffle.svg" width={64} height={64} alt="" />
+            </Button>
+            <Link href="/books">
+              <Image src="/book-list.svg" width={64} height={64} alt="" />
+            </Link>
           </IndexIconsContainer>
           <IndexBuiltByContainer>
             built by joshua galinato
@@ -78,7 +72,7 @@ export default function Home({ books }: { books: any }) {
   )
 }
 
-export async function getStaticProps(context: any) {
+export async function getServerSideProps(context: any) {
   let site = process.env.WEB_SITE
   let res = await fetch(`${site}/api/books/`, {
     method: 'GET',

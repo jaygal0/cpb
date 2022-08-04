@@ -45,3 +45,13 @@ export const IndexBuiltByContainer = styled.div`
   color: ${({ theme }) => theme.color.white};
   font-weight: 300;
 `
+
+export const Button = styled.button`
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+`

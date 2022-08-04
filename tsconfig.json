@@ -21,7 +21,8 @@
     "**/*.tsx",
     "components/Highlight.js",
     "utils/dbConnect.ts",
-    "pages/api/books/index.js"
+    "pages/api/books/index.js",
+    "pages/books/[id].tsx"
   ],
   "exclude": ["node_modules"]
 }
