@@ -15,8 +15,9 @@ export default {
       bold: '700',
     },
     height: {
-      normal: '130%',
-      tall: '150%',
+      sm: '120%',
+      md: '130%',
+      lg: '150%',
     },
   },
   color: {

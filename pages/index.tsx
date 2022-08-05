@@ -14,11 +14,13 @@ import Author from '../components/Author'
 import Logo from '../components/Logo'
 import Link from 'next/link'
 import styled from 'styled-components'
+import ShuffleIcon from '../components/ShuffleIcon'
 
 export default function Home({ books }: { books: any }) {
   const [randomTitle, setRandomTitle] = useState<string>('')
   const [randomAuthor, setRandomAuthor] = useState<string>('')
   const [randomHighlight, setRandomHighlight] = useState<string>('')
+  const [randomPage, setRandomPage] = useState<string>('')
   const [didClick, setDidClick] = useState<boolean>(true)
   const [theme, setTheme] = useState<string>('green')
   const themeColors = ['green', 'yellow', 'purple', 'orange', 'red']
@@ -36,10 +38,15 @@ export default function Home({ books }: { books: any }) {
       ].text
     let theAuthor = theObject.authors
     let theTitle = theObject.title
+    let thePage =
+      theObject.highlights[
+        Math.floor(Math.random() * theObject.highlights.length)
+      ].location.value
 
     setRandomTitle(theTitle)
     setRandomAuthor(theAuthor)
     setRandomHighlight(theHighlight)
+    setRandomPage(thePage)
   }, [didClick])
 
   // a function to allow the useEffect to listen to the onClick
@@ -54,18 +61,18 @@ export default function Home({ books }: { books: any }) {
         <title>Commonplacebook</title>
       </Head>
       <IndexMainContainer theme={theme}>
-        <Logo />
+        <Logo color={theme} />
         <Highlight
           text={randomHighlight}
           count={randomHighlight.length}
           theme={theme}
         />
-        <Author text={randomAuthor} />
-        <Book text={randomTitle} />
+        <Author text={randomAuthor} theme={theme} />
+        <Book text={randomTitle} page={randomPage} theme={theme} />
         <IndexFooterContainer>
           <IndexIconsContainer>
             <Button onClick={handleClick} tabIndex={1}>
-              <Image src="/shuffle.svg" width={64} height={64} alt="" />
+              <ShuffleIcon />
             </Button>
             <Link href="/books">
               <Image src="/book-list.svg" width={64} height={64} alt="" />

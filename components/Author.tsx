@@ -1,20 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Container = styled.div`
+interface Theme {
+  color: string
+}
+
+const Container = styled.div<Theme>`
   padding: 0rem 2.4rem;
-  color: ${({ theme }) => theme.color.green.secondary};
   font-size: ${({ theme }) => theme.type.size.lg};
   font-weight: ${({ theme }) => theme.type.weight.normal};
   line-height: ${({ theme }) => theme.type.height.normal};
-
-  ::selection {
-    background: ${({ theme }) => theme.color.green04};
-  }
+  color: ${(props) =>
+    props.color == 'green'
+      ? '#12635A'
+      : props.color == 'yellow'
+      ? '#0074C7'
+      : props.color == 'purple'
+      ? '#F2D4E9'
+      : props.color == 'orange'
+      ? '#205F7E'
+      : props.color == 'red'
+      ? '#303030'
+      : '#072723'};
+  transition: all 0.7s ease-in-out;
 `
 
-const Author = ({ text }: { text: string }) => {
-  return <Container>{text}</Container>
+const Author = ({ text, theme }: { text: string; theme: string }) => {
+  return <Container color={theme}>{text}</Container>
 }
 
 export default Author

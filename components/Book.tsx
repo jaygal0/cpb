@@ -1,20 +1,40 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Container = styled.div`
+interface Theme {
+  color: string
+}
+
+const Container = styled.div<Theme>`
   padding: 2.4rem 2.4rem;
-  color: ${({ theme }) => theme.color.green.secondary};
+  font-family: Inter, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: ${({ theme }) => theme.type.md};
   position: absolute;
   bottom: 0;
-
-  ::selection {
-    background: ${({ theme }) => theme.color.green04};
-  }
+  color: ${(props) =>
+    props.color == 'green'
+      ? '#0B3C37'
+      : props.color == 'yellow'
+      ? '#005FA3'
+      : props.color == 'purple'
+      ? '#F0CBE4'
+      : props.color == 'orange'
+      ? '#18465D'
+      : props.color == 'red'
+      ? '#18465D'
+      : '#0B3C37'};
 `
 
-const Book = ({ text }: { text: string }) => {
-  return <Container>{text}</Container>
+const Book = ({
+  text,
+  page,
+  theme,
+}: {
+  text: string
+  page: string
+  theme: string
+}) => {
+  return <Container color={theme}>{`${text} / Page ${page}`}</Container>
 }
 
 export default Book
