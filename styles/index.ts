@@ -1,14 +1,30 @@
 import styled from 'styled-components'
 
-export const IndexMainContainer = styled.main`
+interface Main {
+  theme: any
+}
+
+export const IndexMainContainer = styled.main<Main>`
   min-height: 100vh;
   max-width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0rem;
-  background: ${({ theme }) => theme.color.green.background};
+  background: ${(props) =>
+    props.theme == 'green'
+      ? '#27C3B1'
+      : props.theme == 'yellow'
+      ? '#FFFD83'
+      : props.theme == 'purple'
+      ? '#2D3047'
+      : props.theme == 'orange'
+      ? '#FFB799'
+      : props.theme == 'red'
+      ? '#FB7C86'
+      : '#27C3B1'};
   position: relative;
+  transition: all 0.7s ease-in-out;
 `
 
 export const IndexMainBookContainer = styled.main`

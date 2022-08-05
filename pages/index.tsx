@@ -13,12 +13,15 @@ import Book from '../components/Book'
 import Author from '../components/Author'
 import Logo from '../components/Logo'
 import Link from 'next/link'
+import styled from 'styled-components'
 
 export default function Home({ books }: { books: any }) {
   const [randomTitle, setRandomTitle] = useState<string>('')
   const [randomAuthor, setRandomAuthor] = useState<string>('')
   const [randomHighlight, setRandomHighlight] = useState<string>('')
   const [didClick, setDidClick] = useState<boolean>(true)
+  const [theme, setTheme] = useState<string>('green')
+  const themeColors = ['green', 'yellow', 'purple', 'orange', 'red']
 
   // deconstructing the prop from the database
   let { data } = books
@@ -42,6 +45,7 @@ export default function Home({ books }: { books: any }) {
   // a function to allow the useEffect to listen to the onClick
   function handleClick() {
     setDidClick(!didClick)
+    setTheme(themeColors[Math.floor(Math.random() * themeColors.length)])
   }
 
   return (
@@ -49,9 +53,13 @@ export default function Home({ books }: { books: any }) {
       <Head>
         <title>Commonplacebook</title>
       </Head>
-      <IndexMainContainer>
+      <IndexMainContainer theme={theme}>
         <Logo />
-        <Highlight text={randomHighlight} count={randomHighlight.length} />
+        <Highlight
+          text={randomHighlight}
+          count={randomHighlight.length}
+          theme={theme}
+        />
         <Author text={randomAuthor} />
         <Book text={randomTitle} />
         <IndexFooterContainer>
