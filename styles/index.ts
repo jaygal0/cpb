@@ -10,6 +10,7 @@ export const IndexMainContainer = styled.main<Main>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 0rem;
   background: ${(props) =>
     props.theme == 'green'

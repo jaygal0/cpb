@@ -13,8 +13,7 @@ import Book from '../components/Book'
 import Author from '../components/Author'
 import Logo from '../components/Logo'
 import Link from 'next/link'
-import styled from 'styled-components'
-import ShuffleIcon from '../components/ShuffleIcon'
+import IconCircle from '../components/IconCircle'
 
 export default function Home({ books }: { books: any }) {
   const [randomTitle, setRandomTitle] = useState<string>('')
@@ -24,6 +23,11 @@ export default function Home({ books }: { books: any }) {
   const [didClick, setDidClick] = useState<boolean>(true)
   const [theme, setTheme] = useState<string>('green')
   const themeColors = ['green', 'yellow', 'purple', 'orange', 'red']
+
+  // TODO: Need to update design
+  // TODO: Need to clean up database
+  // TODO: Upload to Vercel
+  // TODO: Connect to Graphql
 
   // deconstructing the prop from the database
   let { data } = books
@@ -61,21 +65,25 @@ export default function Home({ books }: { books: any }) {
         <title>Commonplacebook</title>
       </Head>
       <IndexMainContainer theme={theme}>
-        <Logo color={theme} />
-        <Highlight
-          text={randomHighlight}
-          count={randomHighlight.length}
-          theme={theme}
-        />
-        <Author text={randomAuthor} theme={theme} />
+        <div>
+          <Logo color={theme} />
+          <Highlight
+            text={randomHighlight}
+            count={randomHighlight.length}
+            theme={theme}
+          />
+          <Author text={randomAuthor} theme={theme} />
+        </div>
         <Book text={randomTitle} page={randomPage} theme={theme} />
         <IndexFooterContainer>
           <IndexIconsContainer>
             <Button onClick={handleClick} tabIndex={1}>
-              <ShuffleIcon />
+              <IconCircle shuffle={true} list={false} color={theme} />
             </Button>
             <Link href="/books">
-              <Image src="/book-list.svg" width={64} height={64} alt="" />
+              <Button>
+                <IconCircle shuffle={false} list={true} color={theme} />
+              </Button>
             </Link>
           </IndexIconsContainer>
           <IndexBuiltByContainer>

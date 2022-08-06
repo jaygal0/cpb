@@ -6,11 +6,10 @@ interface Theme {
 }
 
 const Container = styled.div<Theme>`
+  margin-top: 5.6rem;
   padding: 2.4rem 2.4rem;
   font-family: Inter, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: ${({ theme }) => theme.type.md};
-  position: absolute;
-  bottom: 0;
   color: ${(props) =>
     props.color == 'green'
       ? '#0B3C37'
@@ -34,7 +33,7 @@ const Book = ({
   page: string
   theme: string
 }) => {
-  return <Container color={theme}>{`${text} / Page ${page}`}</Container>
+  return <Container color={theme}>{`${text} / Location ${page}`}</Container>
 }
 
 export default Book
