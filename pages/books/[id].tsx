@@ -1,12 +1,35 @@
 import React from 'react'
 import HighlightList from '../../components/HighlightList'
+import Logo from '../../components/Logo'
+import {
+  IndexMainContainer,
+  IndexFooterContainer,
+  IndexIconsContainer,
+  IndexButton,
+} from '../../styles'
+import IconCircle from '../../components/IconCircle'
+import BuiltBy from '../../components/BuiltBy'
+import Link from 'next/link'
 
 const index = ({ docs }: { docs: any }) => {
   const { data } = docs
 
   return (
     <>
-      <HighlightList data={data} />
+      <IndexMainContainer>
+        <Logo color="green" />
+        <HighlightList data={data} />
+      </IndexMainContainer>
+      <IndexFooterContainer className="book-list">
+        <IndexIconsContainer>
+          <Link href="/books">
+            <IndexButton tabIndex={1}>
+              <IconCircle back color="green" />
+            </IndexButton>
+          </Link>
+        </IndexIconsContainer>
+        <BuiltBy />
+      </IndexFooterContainer>
     </>
   )
 }

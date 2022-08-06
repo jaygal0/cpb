@@ -1,16 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BookList from '../components/BookList'
+import {
+  IndexMainBookContainer,
+  IndexFooterContainer,
+  IndexIconsContainer,
+  IndexButton,
+} from '../styles'
+import IconCircle from '../components/IconCircle'
+import BuiltBy from '../components/BuiltBy'
+import Logo from '../components/Logo'
+import Link from 'next/link'
 
 export default function bookList({ docs }: { docs: any }) {
   const { data } = docs
-  return <BookList data={data} />
-}
 
-// TODO: Need to add buttons
-// TODO: Need to update design
-// TODO: Need to clean up database
-// TODO: Upload to Vercel
-// TODO: Connect to Graphql
+  return (
+    <>
+      <IndexMainBookContainer>
+        <Logo color="green" />
+        <BookList data={data} />
+      </IndexMainBookContainer>
+      <IndexFooterContainer className="book-list">
+        <IndexIconsContainer>
+          <Link href="/">
+            <IndexButton tabIndex={1}>
+              <IconCircle close color="green" />
+            </IndexButton>
+          </Link>
+        </IndexIconsContainer>
+        <BuiltBy />
+      </IndexFooterContainer>
+    </>
+  )
+}
 
 export async function getServerSideProps(context: any) {
   const site = process.env.WEB_SITE

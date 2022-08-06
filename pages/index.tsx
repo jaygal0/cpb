@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import {
   IndexMainContainer,
   IndexFooterContainer,
   IndexIconsContainer,
-  IndexBuiltByContainer,
-  Button,
+  IndexButton,
 } from '../styles'
 import Highlight from '../components/Highlight'
 import Book from '../components/Book'
@@ -14,6 +12,7 @@ import Author from '../components/Author'
 import Logo from '../components/Logo'
 import Link from 'next/link'
 import IconCircle from '../components/IconCircle'
+import BuiltBy from '../components/BuiltBy'
 
 export default function Home({ books }: { books: any }) {
   const [randomTitle, setRandomTitle] = useState<string>('')
@@ -24,7 +23,11 @@ export default function Home({ books }: { books: any }) {
   const [theme, setTheme] = useState<string>('green')
   const themeColors = ['green', 'yellow', 'purple', 'orange', 'red']
 
-  // TODO: Need to update design
+  // TODO: Add breadcrumb
+  // TODO: Add `{readOn && ${readOn}}` code in underneath the author in /books
+  // TODO: Add `{rating && ${rating}}` code in underneath the author in /books
+  // TODO: Add summary in /books/[id]
+  // TODO: clean up Figma
   // TODO: Need to clean up database
   // TODO: Upload to Vercel
   // TODO: Connect to Graphql
@@ -75,22 +78,20 @@ export default function Home({ books }: { books: any }) {
           <Author text={randomAuthor} theme={theme} />
         </div>
         <Book text={randomTitle} page={randomPage} theme={theme} />
-        <IndexFooterContainer>
-          <IndexIconsContainer>
-            <Button onClick={handleClick} tabIndex={1}>
-              <IconCircle shuffle={true} list={false} color={theme} />
-            </Button>
-            <Link href="/books">
-              <Button>
-                <IconCircle shuffle={false} list={true} color={theme} />
-              </Button>
-            </Link>
-          </IndexIconsContainer>
-          <IndexBuiltByContainer>
-            built by joshua galinato
-          </IndexBuiltByContainer>
-        </IndexFooterContainer>
       </IndexMainContainer>
+      <IndexFooterContainer>
+        <IndexIconsContainer>
+          <IndexButton onClick={handleClick} tabIndex={1}>
+            <IconCircle shuffle color={theme} />
+          </IndexButton>
+          <Link href="/books">
+            <IndexButton>
+              <IconCircle list color={theme} />
+            </IndexButton>
+          </Link>
+        </IndexIconsContainer>
+        <BuiltBy />
+      </IndexFooterContainer>
     </>
   )
 }

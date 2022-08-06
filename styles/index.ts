@@ -42,6 +42,9 @@ export const IndexInputContainer = styled.div`
 `
 
 export const IndexFooterContainer = styled.footer`
+  position: absolute;
+  top: 0;
+  right: 0;
   padding: 6.4rem 2.4rem 2.4rem 0;
   max-width: 20vw;
   height: 100%;
@@ -51,8 +54,10 @@ export const IndexFooterContainer = styled.footer`
   align-items: flex-end;
   color: ${({ theme }) => theme.color.green.primary};
   font-size: ${({ theme }) => theme.type.md};
-  position: absolute;
-  right: 0;
+
+  &.book-list {
+    position: fixed;
+  }
 `
 
 export const IndexIconsContainer = styled.div`
@@ -61,13 +66,7 @@ export const IndexIconsContainer = styled.div`
   gap: 2.4rem;
 `
 
-export const IndexBuiltByContainer = styled.div`
-  text-transform: capitalize;
-  color: ${({ theme }) => theme.color.white};
-  font-weight: 300;
-`
-
-export const Button = styled.button`
+export const IndexButton = styled.button`
   background: transparent;
   border: none;
   outline: none;

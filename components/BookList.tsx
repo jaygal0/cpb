@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { IndexMainBookContainer } from '../styles'
 
 const Container = styled.ul`
   padding: 2.4rem 2.4rem;
@@ -20,6 +19,7 @@ const WrapperList = styled.li`
 const Title = styled.div`
   font-size: ${({ theme }) => theme.type.size.heading02};
   font-weight: ${({ theme }) => theme.type.weight.bold};
+  line-height: ${({ theme }) => theme.type.height.md};
   color: ${({ theme }) => theme.color.green.primary};
   margin-bottom: 0.8rem;
 `
@@ -32,18 +32,18 @@ const Author = styled.div`
 
 const BookList = ({ data }: { data: any }) => {
   return (
-    <IndexMainBookContainer>
+    <>
       <Container>
         {data.map((book: any) => (
-          <Link href={`/books/${book.asin}`}>
-            <WrapperList key={`${book.id}-${book.title}`}>
+          <Link key={book.asin} href={`/books/${book.asin}`}>
+            <WrapperList>
               <Title>{book.title}</Title>
               <Author>{book.authors}</Author>
             </WrapperList>
           </Link>
         ))}
       </Container>
-    </IndexMainBookContainer>
+    </>
   )
 }
 

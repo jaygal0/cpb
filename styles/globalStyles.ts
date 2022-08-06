@@ -9,6 +9,10 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
+#__next {
+  position: relative;
+}
+
 * {
   box-sizing: border-box;
 }
