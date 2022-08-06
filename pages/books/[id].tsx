@@ -17,7 +17,7 @@ const index = ({ docs }: { docs: any }) => {
   return (
     <>
       <IndexMainContainer>
-        <Logo color="green" />
+        <Logo color="green" books detail={data[0].title} />
         <HighlightList data={data} />
       </IndexMainContainer>
       <IndexFooterContainer className="book-list">

@@ -23,10 +23,6 @@ export default function Home({ books }: { books: any }) {
   const [theme, setTheme] = useState<string>('green')
   const themeColors = ['green', 'yellow', 'purple', 'orange', 'red']
 
-  // TODO: Add breadcrumb
-  // TODO: Add `{readOn && ${readOn}}` code in underneath the author in /books
-  // TODO: Add `{rating && ${rating}}` code in underneath the author in /books
-  // TODO: Add summary in /books/[id]
   // TODO: clean up Figma
   // TODO: Need to clean up database
   // TODO: Upload to Vercel

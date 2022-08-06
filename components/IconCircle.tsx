@@ -1,4 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const Svg = styled.svg`
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    filter: brightness(115%);
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+`
 
 const Icon = ({
   color,
@@ -14,7 +26,7 @@ const Icon = ({
   back?: boolean
 }) => {
   return (
-    <svg
+    <Svg
       width="64"
       height="64"
       viewBox="0 0 64 64"
@@ -113,7 +125,7 @@ const Icon = ({
           }
         />
       )}
-    </svg>
+    </Svg>
   )
 }
 

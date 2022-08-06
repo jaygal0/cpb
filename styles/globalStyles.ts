@@ -15,11 +15,14 @@ body {
 
 * {
   box-sizing: border-box;
-}
-
-h1 {
   padding: 0;
   margin: 0;
+}
+
+hr {
+ margin: 2.4rem 0 2.4rem 2.4rem; 
+  color: #19897B;
+  width: 5%;
 }
 
 `

@@ -22,6 +22,14 @@ const Title = styled.div`
   line-height: ${({ theme }) => theme.type.height.md};
   color: ${({ theme }) => theme.color.green.primary};
   margin-bottom: 0.8rem;
+  transition: color 0.5s ease-in-out;
+
+  &:hover {
+    color: #d8f8f4;
+  }
+  &:active {
+    color: #0b3c37;
+  }
 `
 
 const Author = styled.div`

@@ -17,7 +17,7 @@ export default function bookList({ docs }: { docs: any }) {
   return (
     <>
       <IndexMainBookContainer>
-        <Logo color="green" />
+        <Logo color="green" books />
         <BookList data={data} />
       </IndexMainBookContainer>
       <IndexFooterContainer className="book-list">
