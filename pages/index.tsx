@@ -24,11 +24,6 @@ export default function Home({ books }: { books: any }) {
   const [theme, setTheme] = useState<string>('green')
   const themeColors = ['green', 'yellow', 'purple', 'orange', 'red']
 
-  // TODO: clean up Figma
-  // TODO: Need to clean up database
-  // TODO: Upload to Vercel
-  // TODO: Connect to Graphql
-
   // deconstructing the prop from the database
   let { data } = books
 
