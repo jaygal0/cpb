@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 interface Theme {
   color: string
@@ -22,18 +23,30 @@ const Container = styled.div<Theme>`
       : props.color == 'red'
       ? '#18465D'
       : '#0B3C37'};
+  transition: all 1s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(10%);
+  }
 `
 
 const Book = ({
   text,
   page,
   theme,
+  asin,
 }: {
   text: string
   page: string
   theme: string
+  asin: string
 }) => {
-  return <Container color={theme}>{`${text} / Location ${page}`}</Container>
+  return (
+    <Link href={`/books/${asin}`}>
+      <Container color={theme}>{`${text} / Location ${page}`}</Container>
+    </Link>
+  )
 }
 
 export default Book

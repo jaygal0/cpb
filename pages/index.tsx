@@ -19,6 +19,7 @@ export default function Home({ books }: { books: any }) {
   const [randomAuthor, setRandomAuthor] = useState<string>('')
   const [randomHighlight, setRandomHighlight] = useState<string>('')
   const [randomPage, setRandomPage] = useState<string>('')
+  const [randomAsin, setRandomAsin] = useState<string>('')
   const [didClick, setDidClick] = useState<boolean>(true)
   const [theme, setTheme] = useState<string>('green')
   const themeColors = ['green', 'yellow', 'purple', 'orange', 'red']
@@ -41,6 +42,7 @@ export default function Home({ books }: { books: any }) {
       ].text
     let theAuthor = theObject.authors
     let theTitle = theObject.title
+    let theAsin = theObject.asin
     let thePage =
       theObject.highlights[
         Math.floor(Math.random() * theObject.highlights.length)
@@ -50,6 +52,7 @@ export default function Home({ books }: { books: any }) {
     setRandomAuthor(theAuthor)
     setRandomHighlight(theHighlight)
     setRandomPage(thePage)
+    setRandomAsin(theAsin)
   }, [didClick])
 
   // a function to allow the useEffect to listen to the onClick
@@ -73,7 +76,12 @@ export default function Home({ books }: { books: any }) {
           />
           <Author text={randomAuthor} theme={theme} />
         </div>
-        <Book text={randomTitle} page={randomPage} theme={theme} />
+        <Book
+          text={randomTitle}
+          asin={randomAsin}
+          page={randomPage}
+          theme={theme}
+        />
       </IndexMainContainer>
       <IndexFooterContainer>
         <IndexIconsContainer>
@@ -86,7 +94,7 @@ export default function Home({ books }: { books: any }) {
             </IndexButton>
           </Link>
         </IndexIconsContainer>
-        <BuiltBy />
+        <BuiltBy color={theme} />
       </IndexFooterContainer>
     </>
   )
