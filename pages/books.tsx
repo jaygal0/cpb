@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BookList from '../components/BookList'
 import {
   IndexMainBookContainer,
@@ -13,7 +13,7 @@ import BuiltBy from '../components/BuiltBy'
 import Logo from '../components/Logo'
 import Link from 'next/link'
 
-export default function bookList({ docs }: { docs: any }) {
+export default function Books({ docs }: { docs: any }) {
   const { data } = docs
   const [sortValue, setSortValue] = useState('title')
   const [filterValue, setFilterValue] = useState('test')
