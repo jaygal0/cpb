@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 
@@ -38,18 +38,58 @@ const Author = styled.div`
   color: ${({ theme }) => theme.color.green.secondary};
 `
 
-const BookList = ({ data }: { data: any }) => {
+const BookList = ({
+  data,
+  sortBy,
+  filter,
+}: {
+  data: any
+  sortBy: string
+  filter: string
+}) => {
   return (
     <>
       <Container>
-        {data.map((book: any) => (
-          <Link key={book.asin} href={`/books/${book.asin}`}>
-            <WrapperList>
-              <Title>{book.title}</Title>
-              <Author>{book.authors}</Author>
-            </WrapperList>
-          </Link>
-        ))}
+        {sortBy == 'title' &&
+          data
+            .sort((a: any, b: any) => {
+              if (a.title > b.title) {
+                return 1
+              } else {
+                return -1
+              }
+            })
+            .filter((e: any) => {
+              if (e.title.toLowerCase().includes(filter)) return e
+            })
+            .map((book: any) => (
+              <Link key={book.asin} href={`/books/${book.asin}`}>
+                <WrapperList>
+                  <Title>{book.title}</Title>
+                  <Author>{book.authors}</Author>
+                </WrapperList>
+              </Link>
+            ))}
+        {sortBy == 'author' &&
+          data
+            .sort((a: any, b: any) => {
+              if (a.authors > b.authors) {
+                return 1
+              } else {
+                return -1
+              }
+            })
+            .filter((e: any) => {
+              if (e.authors.toLowerCase().includes(filter)) return e
+            })
+            .map((book: any) => (
+              <Link key={book.asin} href={`/books/${book.asin}`}>
+                <WrapperList>
+                  <Title>{book.title}</Title>
+                  <Author>{book.authors}</Author>
+                </WrapperList>
+              </Link>
+            ))}
       </Container>
     </>
   )
