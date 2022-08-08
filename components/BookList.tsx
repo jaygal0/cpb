@@ -44,8 +44,8 @@ const BookList = ({
   filter,
 }: {
   data: any
-  sortBy: string
-  filter: string
+  sortBy: any
+  filter: any
 }) => {
   return (
     <>
