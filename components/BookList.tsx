@@ -60,11 +60,7 @@ const BookList = ({
               }
             })
             .filter((e: any) => {
-              if (e.title.toLowerCase().includes(filter)) {
-                return e
-              } else if (filter == 'test') {
-                return e
-              }
+              if (e.title.toLowerCase().includes(filter)) return e
             })
             .map((book: any) => (
               <Link key={book.asin} href={`/books/${book.asin}`}>

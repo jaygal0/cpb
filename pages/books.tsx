@@ -16,7 +16,7 @@ import Link from 'next/link'
 export default function Books({ docs }: { docs: any }) {
   const { data } = docs
   const [sortValue, setSortValue] = useState('title')
-  const [filterValue, setFilterValue] = useState('test')
+  const [filterValue, setFilterValue] = useState('')
 
   return (
     <>
