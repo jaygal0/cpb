@@ -179,7 +179,7 @@ const BookList = ({ data }: { data: any }) => {
               </Link>
             ))}
         {db.length === 0 && (
-          <span>Sorry! Can't find what you're looking for.</span>
+          <span>Sorry! Can&apos;t find what you&apos;re looking for.</span>
         )}
       </Container>
     </>
