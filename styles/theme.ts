@@ -25,6 +25,7 @@ export default {
       background: '#27C3B1',
       primary: '#072723',
       secondary: '#19897B',
+      skeleton: '#3CDDCA',
       button: '#8CE8DD',
       buttonHover: '#E2F9F7',
       buttonActive: '#C6F4EE',

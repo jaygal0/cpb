@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
+import { useState } from 'react'
 import styled from 'styled-components'
 import IconSort from './IconSort'
 
@@ -7,7 +8,17 @@ const Container = styled.ul`
   padding: 2.4rem 2.4rem;
   margin: 0;
   width: 70vw;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
+
 const WrapperList = styled.li`
   list-style: none;
   margin-bottom: 4rem;
