@@ -56,6 +56,15 @@ const ContainerSearch = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 60vw;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const Search = styled.input`
   font-size: ${({ theme }) => theme.type.size.sm};
@@ -79,8 +88,16 @@ const SortButton = styled.button`
   background: none;
   outline: none;
   border: none;
-
-  &:hover {
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  s &:hover {
     cursor: pointer;
   }
   &:hover {
@@ -94,6 +111,15 @@ const SortButton = styled.button`
 const SearchResults = styled.div`
   padding: 0.8rem 2.4rem;
   font-size: ${({ theme }) => theme.type.size.sm};
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const BookList = ({ data }: { data: any }) => {

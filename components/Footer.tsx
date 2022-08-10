@@ -14,18 +14,45 @@ const Container = styled.footer`
   font-size: ${({ theme }) => theme.type.md};
   position: absolute;
   right: 0;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const ContainerIcons = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const BuiltBy = styled.div`
   text-transform: capitalize;
   color: ${({ theme }) => theme.color.white};
   font-weight: 300;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const Footer = () => {

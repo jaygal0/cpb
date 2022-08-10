@@ -10,6 +10,15 @@ const Title = styled.h2`
   color: ${({ theme }) => theme.color.green.primary};
   padding: 1.2rem 0 0.8rem 2.4rem;
   width: 65vw;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const Summary = styled.p`
   font-size: ${({ theme }) => theme.type.size.md};
@@ -19,20 +28,56 @@ const Summary = styled.p`
   margin: 0 0 0.8rem 0;
   padding: 0 0 1.2rem 2.4rem;
   width: 65vw;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const ContainerMeta = styled.div`
   display: flex;
   padding-left: 2.4rem;
   gap: 0.8rem;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const Meta = styled.p`
   font-size: ${({ theme }) => theme.type.size.sm};
   font-weight: ${({ theme }) => theme.type.weight.normal};
   line-height: ${({ theme }) => theme.type.height.sm};
   color: ${({ theme }) => theme.color.green.secondary};
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const Seperator = styled.div`
   color: ${({ theme }) => theme.color.green.secondary};
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const Text = styled.p`
   font-size: ${({ theme }) => theme.type.size.sm};
@@ -42,6 +87,15 @@ const Text = styled.p`
   margin: 0 0 0.8rem 0;
   padding: 1.2rem 2.4rem;
   width: 65vw;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const TextContainer = styled.div`
   font-size: ${({ theme }) => theme.type.size.md};
@@ -49,6 +103,15 @@ const TextContainer = styled.div`
   color: ${({ theme }) => theme.color.green.primary};
   padding: 1.2rem 2.4rem;
   width: 65vw;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 const Highlight = styled.p`
   font-size: ${({ theme }) => theme.type.size.md};
@@ -56,12 +119,30 @@ const Highlight = styled.p`
   line-height: ${({ theme }) => theme.type.height.tall};
   color: ${({ theme }) => theme.color.green.primary};
   margin: 0 0 0.8rem 0;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const Page = styled.p`
   font-size: ${({ theme }) => theme.type.size.sm};
   font-weight: ${({ theme }) => theme.type.weight.normal};
   color: ${({ theme }) => theme.color.green.secondary};
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const BookList = ({ data }: { data: any }) => {

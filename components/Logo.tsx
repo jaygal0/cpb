@@ -37,6 +37,7 @@ const Wrapper = styled.div`
 `
 const Svg = styled.svg`
   transition: all 1s ease-in-out;
+
   &:hover {
     filter: brightness(50%);
   }

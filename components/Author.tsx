@@ -23,6 +23,15 @@ const Container = styled.div<Theme>`
       ? '#303030'
       : '#072723'};
   transition: all 0.7s ease-in-out;
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const Author = ({ text, theme }: { text: string; theme: string }) => {

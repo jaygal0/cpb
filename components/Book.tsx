@@ -29,6 +29,15 @@ const Container = styled.div<Theme>`
     cursor: pointer;
     filter: brightness(10%);
   }
+  animation: loading 0.3s ease-in;
+  @keyframes loading {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `
 
 const Book = ({
