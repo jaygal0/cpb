@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import IconSort from './IconSort'
 
 const Container = styled.ul`
   padding: 2.4rem 2.4rem;
@@ -63,10 +64,25 @@ const Search = styled.input`
   }
 `
 const SortButton = styled.button`
-  padding: 0;
+  padding: 0 0.2rem;
   background: none;
   outline: none;
   border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover {
+    background: #c3f4ee;
+    border-radius: 0.2rem;
+  }
+  &:active {
+    filter: brightness(90%);
+  }
+`
+const SearchResults = styled.div`
+  padding: 0.8rem 2.4rem;
+  font-size: ${({ theme }) => theme.type.size.sm};
 `
 
 const BookList = ({ data }: { data: any }) => {
@@ -107,42 +123,12 @@ const BookList = ({ data }: { data: any }) => {
             setSortValue(!sortValue)
           }}
         >
-          {sortValue && (
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M23 39H31M23 9H43H23ZM5 16L13 8L5 16ZM13 8V42V8ZM23 19H39H23ZM23 29H35H23Z"
-                stroke="black"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-          {!sortValue && (
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M23 38H31M23 8H43H23ZM14 41L6 33L14 41ZM14 7V41V7ZM23 18H39H23ZM23 28H35H23Z"
-                stroke="black"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
+          <IconSort sortValue={sortValue} />
         </SortButton>
       </ContainerSearch>
+      <SearchResults>{`${
+        searchValue.length > 0 ? 'Search Results Count' : 'Total Books Read'
+      }: ${db.length}`}</SearchResults>
       <Container>
         {sortValue &&
           db
