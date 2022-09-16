@@ -55,7 +55,7 @@ const BuiltBy = styled.div`
   }
 `
 
-const Footer = () => {
+const Footer = ({ theme }: { theme?: string }) => {
   return (
     <Container>
       <ContainerIcons>

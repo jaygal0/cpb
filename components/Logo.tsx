@@ -8,6 +8,14 @@ const Container = styled.div`
   transition: all 0.7s ease-in-out;
   align-items: center;
   gap: 1.2rem;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakPoint.tablet}) {
+    padding: 2.4rem 1.6rem 0 1.6rem;
+    max-width: 100vw;
+    font-size: ${({ theme }) => theme.type.size.lg};
+    font-weight: ${({ theme }) => theme.type.weight.bold};
+    line-height: ${({ theme }) => theme.type.height.md};
+  }
 `
 const ContainerBreadcrumb = styled.div`
   display: flex;

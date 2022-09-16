@@ -33,6 +33,14 @@ const ContainerSmallText = styled.h1<Theme>`
       opacity: 1;
     }
   }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakPoint.tablet}) {
+    padding: 1.2rem 1.6rem;
+    max-width: 100vw;
+    font-size: ${({ theme }) => theme.type.size.md};
+    font-weight: ${({ theme }) => theme.type.weight.bold};
+    line-height: ${({ theme }) => theme.type.height.md};
+  }
 `
 
 const ContainerDefaultText = styled.h1<Theme>`
@@ -55,6 +63,7 @@ const ContainerDefaultText = styled.h1<Theme>`
       : '#072723'};
   transition: all 0.7s ease-in-out;
   animation: loading 0.3s ease-in;
+
   @keyframes loading {
     from {
       opacity: 0;
@@ -62,6 +71,14 @@ const ContainerDefaultText = styled.h1<Theme>`
     to {
       opacity: 1;
     }
+  }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakPoint.tablet}) {
+    padding: 1.2rem 1.6rem;
+    max-width: 100vw;
+    font-size: ${({ theme }) => theme.type.size.lg};
+    font-weight: ${({ theme }) => theme.type.weight.bold};
+    line-height: ${({ theme }) => theme.type.height.md};
   }
 `
 

@@ -78,7 +78,7 @@ export default function Home({ books }: { books: any }) {
           theme={theme}
         />
       </IndexMainContainer>
-      <IndexFooterContainer>
+      <IndexFooterContainer background={theme}>
         <IndexIconsContainer>
           <IndexButton onClick={handleClick} tabIndex={1}>
             <IconCircle shuffle color={theme} />
@@ -95,7 +95,7 @@ export default function Home({ books }: { books: any }) {
   )
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   let site = process.env.WEB_SITE
   let res = await fetch(`${site}/api/books/`, {
     method: 'GET',

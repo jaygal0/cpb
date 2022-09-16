@@ -40,4 +40,13 @@ export default {
     md: '8px',
     lg: '',
   },
+  breakPoint: {
+    desktop4K: '2561px',
+    desktopLarge: '1441px',
+    desktopSmall: '1024px',
+    tablet: '810px',
+    phoneLarge: '426px',
+    phoneMedium: '376px',
+    phoneSmall: '321px',
+  },
 }

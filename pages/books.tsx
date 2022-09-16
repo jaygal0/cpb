@@ -35,7 +35,7 @@ export default function Books({ docs }: { docs: any }) {
   )
 }
 
-export async function getServerSideProps(context: any) {
+export async function getStaticProps(context: any) {
   const site = process.env.WEB_SITE
 
   const res = await fetch(`${site}/api/books`)

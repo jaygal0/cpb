@@ -32,6 +32,14 @@ const Container = styled.div<Theme>`
       opacity: 1;
     }
   }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakPoint.tablet}) {
+    padding: 0 1.6rem;
+    max-width: 100vw;
+    font-size: ${({ theme }) => theme.type.size.md};
+    font-weight: ${({ theme }) => theme.type.weight.bold};
+    line-height: ${({ theme }) => theme.type.height.md};
+  }
 `
 
 const Author = ({ text, theme }: { text: string; theme: string }) => {

@@ -38,6 +38,12 @@ const Container = styled.div<Theme>`
       opacity: 1;
     }
   }
+  @media screen and (max-width: ${({ theme }) => theme.breakPoint.tablet}) {
+    padding: 1.6rem;
+    max-width: 100vw;
+    font-size: ${({ theme }) => theme.type.size.xs};
+    line-height: ${({ theme }) => theme.type.height.lg};
+  }
 `
 
 const Book = ({
