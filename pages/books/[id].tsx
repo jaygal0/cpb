@@ -36,7 +36,7 @@ const index = ({ docs }: { docs: any }) => {
 
 export default index
 
-export async function getStaticPaths({ query: { id } }: { query: any }) {
+export async function getStaticProps({ query: { id } }: { query: any }) {
   const site = process.env.WEB_SITE
 
   const res = await fetch(`${site}/api/books/${id}`)
