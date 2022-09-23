@@ -36,9 +36,20 @@ const index = ({ docs }: { docs: any }) => {
 
 export default index
 
-export async function getStaticProps({ query: { id } }: { query: any }) {
-  const site = process.env.WEB_SITE
+// export async function getStaticPaths() {
+//   const site = process.env.WEB_SITE
+//   const res = await fetch(`${site}/api/books`)
+//   const docs = await res.json()
+//   const paths = docs.map((post: any) => ({
+//     params: { id: post.asin },
+//   }))
 
+//   // { fallback: false } means other routes should 404
+//   return { paths, fallback: false }
+// }
+
+export async function getServerSideProps({ query: { id } }: { query: any }) {
+  const site = process.env.WEB_SITE
   const res = await fetch(`${site}/api/books/${id}`)
   const docs = await res.json()
 
@@ -50,5 +61,7 @@ export async function getStaticProps({ query: { id } }: { query: any }) {
 
   return {
     props: { docs },
+    fallback: false,
+    revalidate: 86400,
   }
 }
