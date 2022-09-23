@@ -61,7 +61,5 @@ export async function getServerSideProps({ query: { id } }: { query: any }) {
 
   return {
     props: { docs },
-    fallback: false,
-    revalidate: 86400,
   }
 }
