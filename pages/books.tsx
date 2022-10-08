@@ -49,5 +49,6 @@ export async function getStaticProps(context: any) {
 
   return {
     props: { docs },
+    revalidate: 100,
   }
 }

@@ -61,5 +61,6 @@ export async function getServerSideProps({ query: { id } }: { query: any }) {
 
   return {
     props: { docs },
+    revalidate: 100,
   }
 }
